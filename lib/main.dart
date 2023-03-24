@@ -7,6 +7,22 @@ void main() {
 
 class Xylophone extends StatelessWidget {
   const Xylophone({super.key});
+  void playSound(int noteNumber) {
+    final player = AudioPlayer();
+    player.play(AssetSource('note$noteNumber.wav'));
+  }
+
+  buildKey({required color, required int soundNumber}) {
+    return Expanded(
+      child: OutlinedButton(
+        onPressed: () {
+          playSound(soundNumber);
+        },
+        style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(color)),
+        child: const Text(' '),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,83 +33,15 @@ class Xylophone extends StatelessWidget {
         ),
         body: SafeArea(
             child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Expanded(
-              child: OutlinedButton(
-                onPressed: () {
-                  final player = AudioPlayer();
-                  player.play(AssetSource('note1.wav'));
-                },
-                style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.red)),
-                child: const Text(' '),
-              ),
-            ),Expanded(
-              child: OutlinedButton(
-                onPressed: () {
-                  final player = AudioPlayer();
-                  player.play(AssetSource('note2.wav'));
-                },
-                style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.amber)),
-                child: const Text(' '),
-              ),
-            ),
-            Expanded(
-              child: OutlinedButton(
-                onPressed: () {
-                  final player = AudioPlayer();
-                  player.play(AssetSource('note3.wav'));
-                },
-                style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.brown)),
-                child: const Text(' '),
-              ),
-            ),
-            Expanded(
-              child: OutlinedButton(
-                onPressed: () {
-                  final player = AudioPlayer();
-                  player.play(AssetSource('note4.wav'));
-                },
-                style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.cyan)),
-                child: const Text(' '),
-              ),
-            ),
-            Expanded(
-              child: OutlinedButton(
-                onPressed: () {
-                  final player = AudioPlayer();
-                  player.play(AssetSource('note5.wav'));
-                },
-                style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.yellow)),
-                child: const Text(' '),
-              ),
-            ),
-            Expanded(
-              child: OutlinedButton(
-                onPressed: () {
-                  final player = AudioPlayer();
-                  player.play(AssetSource('note6.wav'));
-                },
-                style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.white)),
-                child: const Text(' '),
-              ),
-            ),
-            Expanded(
-              child: OutlinedButton(
-                onPressed: () {
-                  final player = AudioPlayer();
-                  player.play(AssetSource('note7.wav'));
-                },
-                style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.orange)),
-                child: const Text(' '),
-              ),
-            ),
+            buildKey(color: Colors.red, soundNumber: 1),
+            buildKey(color: Colors.amber, soundNumber: 2),
+            buildKey(color: Colors.yellow, soundNumber: 3),
+            buildKey(color: Colors.white, soundNumber: 4),
+            buildKey(color: Colors.pink, soundNumber: 5),
+            buildKey(color: Colors.cyan, soundNumber: 6),
+            buildKey(color: Colors.teal, soundNumber: 7)
           ],
         )),
       ),
